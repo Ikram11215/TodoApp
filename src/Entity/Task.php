@@ -17,13 +17,17 @@ class Task
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $state = null;
+    private ?string $state = 'pending';
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $priority = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -74,6 +78,18 @@ class Task
     public function setPriority(string $priority): static
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
