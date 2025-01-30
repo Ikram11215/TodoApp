@@ -2,46 +2,46 @@
 
 namespace App\Form;
 
-use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaskFiltersType extends AbstractType
 {
-    private array $currentState =[];
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('id', HiddenType::class, [
-
-        ])
-            ->add('name')
-            ->add('state')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
+            ->add('id', TextType::class, ['required' => false])
+            ->add('name', TextType::class, ['required' => false])
+            ->add('priority', ChoiceType::class, [
+                'choices' => [
+                    'Haute' => 1,
+                    'Moyenne' => 2,
+                    'Basse' => 3,
+                ],
+                'required' => false,
             ])
-            ->add('priority')
-        ;
+            ->add('state', ChoiceType::class, [
+                'choices' => [
+                    'En attente' => 'pending',
+                    'Complétée' => 'completed',
+                ],
+                'required' => false,
+            ])
+            ->add('createdAt', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Task::class,
+            'csrf_protection' => false,
         ]);
     }
-
-    public function getCurrentState(): string
-    {
-        return $this->currentState;
-    }
-
-    public function setCurrentState(string $currentState): Post
-    {
-        $this->currentState = $currentState;
-        return $this;
-    }
-
 }
