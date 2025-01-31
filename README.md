@@ -4,7 +4,7 @@
 
 ### Description
 
-Le projet **Task Management System** est une application web développée avec Symfony permettant de gérer des tâches. Les utilisateurs peuvent afficher, ajouter, compléter et supprimer des tâches. L'application propose des filtres pour rechercher des tâches selon leur nom, priorité et état (en cours, terminée, etc.).
+Le projet **Todo App** est une application web développée avec Symfony permettant de gérer des tâches. Les utilisateurs peuvent afficher, ajouter, compléter et supprimer des tâches. L'application propose des filtres pour rechercher des tâches selon leur nom, priorité et état (en cours, terminée, etc.).
 
 ### Fonctionnalités
 
